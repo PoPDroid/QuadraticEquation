@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>Quadratic Equation Guide</title>
+		<META NAME="Keywords" CONTENT="find,graph,quadratic,function,equation,vertex">
+		<META NAME="Description" CONTENT="Find the equation of a quadratic function given its graphs.">
+		<META NAME="Author" CONTENT="ADendane@uaeu.ac.ae">
+
+		<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css">
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<script src="js/jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/x-mathjax-config">
+
+			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+
+		<script type="text/javascript"
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+		<LINK href="css/style.css" rel="stylesheet" type="text/css">
+
+		<script src="js/quad.js"></script>
+
+	</head>
+
+	<body>
+		<!--
+
+		give option to insert quadratic or randomly generate
+		also give solve option for each step
+
+		Methods
+		1using quad formula
+		2factoring
+		3taking squareroot when b is 0
+		4diff of 2 squares same as above??
+
+		-->
+		<div data-role="page" id="mainPage" align="center">
+
+			<div data-role="content">
+				<a href="#newDialog" data-role="button" data-rel="dialog">New Equation</a>
+<br/><br/><br/>
+
+				<font size="5px"><span id="myDiva"></span></font></p>
+				<fieldset class="ui-field-contain">
+					<label for="method">Select Method</label>
+					<select name="method" id="method"  data-native-menu="false">
+						<option value="quadformula">Using Quadratic Formula</option>
+						<option value="factoring">Solve By Factoring</option>
+						<option value="squares">Difference of 2 Squares</option>
+					</select>
+				</fieldset>
+
+				<div id="quadformula" >
+					<button id='showquadformula' onclick="showQuadFormula()"  type='button'>
+						Show Quadratic Formula
+					</button>
+					<div id="quadformulacontain" align="center" style="display:none">
+						<font size="5px"><span id="quadformulaSpan" > $x=\frac{-b \pm \sqrt{b^2-4ac}}{2a}$</span></font></p>
+					</div>
+					<div id = "quadformula1">
+					<font size="5px"><span > $a=$</span>
+							<input maxlength="4" size="4" type="number"  id="acoeffans">
+							 $b=$
+							<input maxlength="4" size="4" type="number" id="bcoeffans">
+							 $c=$
+							<input maxlength="4" size="4" type="number" id="ccoeffans">
+							
+					</font>
+					</div>
+
+				</div>
+
+				<div id="factoring" style="display:none">
+					<button id='showfactors' onclick="showFactors()"  type='button'>
+						Show Factors
+					</button>
+				</div>
+				
+				<div id="squares" style="display:none">
+					<button id='showsquare' onclick="showSquare()"  type='button'>
+						Show Square
+					</button>
+				</div>
+<br/><br/><br/>
+				<button id='showgraph' onclick="showGraph()"  type='button'>
+					Show Graph
+				</button>
+				<div id="canvascontain" align="center" style="display:none">
+					<canvas id="canvas2" width="500" height="500" style="border:solid 1px #0000ff">
+
+					</canvas>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="dialog" id="newDialog" >
+			<div data-role="header">
+				<h1>New Equation</h1>
+			</div>
+			<div data-role="content" align="center">
+
+				<font size="5px"><span id="customquadfunctionSpan" >
+						<div data-role="fieldcontain">
+							<input maxlength="4" size="4" type="number" id="acoeff">
+							$x^2$
+							<input maxlength="4" size="4" type="number" id="bcoeff">
+							$x$
+							<input maxlength="4" size="4" type="number" id="ccoeff">
+							$=0$
+					</span></font></p>
+			</div>
+			<button id='btncustom' onclick="plotcustom()"  type='button'>
+				Insert Equation Above
+			</button>
+			OR
+			<button id='btngenerate' onclick="plot()"  type='button'>
+				Generate Random Equation
+			</button>
+		</div>
+		</div>
+	</body>
+
+</html>
