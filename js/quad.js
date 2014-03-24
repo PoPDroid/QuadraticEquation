@@ -42,24 +42,107 @@ var bsqr;
 var fac;
 var ta;
 var bsqrmfac;
+var sqrtbsqrfac;
 var hasrealroots;
 var quadformulasln1;
 var quadformulasln2;
 
-
 $(document).ready(function() {
-	$("select").change(function() {
+	keep checking values if answer is correct. if so, remove submit button and change input to label
+	
+	
+	$("#method").change(function() {
 		$("#quadformula").hide();
 		$("#factoring").hide();
 		$("#squares").hide();
-		$('#' + $(this).val()).show();
-
+		if ($(this).val() == "quadformula") {
+			$("#quadformula").show();
+		}
+		if ($(this).val() == "squares") {
+			if (isSquare(c) && isSquare(a) && b == 0) {
+				$("#squares").show();
+			} else {
+				$("#method").val("quadformula").selectmenu('refresh');
+				alert("Not a difference of 2 squares!");
+				$("#quadformula").show();
+			}
+		}
+		if ($(this).val() == "factoring") {
+			var hasfactors = false;
+			$.each(getFactors, function(){
+				//find out if can be factored
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			});
+			if (bsqrmfac > 0) {
+				
+				$("#factoring").show();
+			} else {
+				$("#method").val("quadformula").selectmenu('refresh');
+				alert("Not real roots");
+				$("#quadformula").show();
+			}
+		}
 	});
 
+	$('input[name=start-radio]').on('change', function() {
+
+		if (this.value == "random") {
+			$('#customquadfunction').hide();
+		} else if (this.value == "custom") {
+			$('#customquadfunction').show();
+
+		}
+	});
 });
 
-function plot() {
+function getFactors(integer){
+  var factors = [],
+  quotient = 0;
 
+  for(var i = 1; i <= integer; i++){
+    quotient = integer/i;
+
+    if(quotient === Math.floor(quotient)){
+      factors.push(i); 
+    }
+  }
+  return factors;
+}
+
+function plotoption() {
+
+		if ($('input:radio[name=start-radio]:checked').val() == "random") {
+			plot();
+		} else if ($('input:radio[name=start-radio]:checked').val() == "custom") {
+			plotcustom() ;
+
+		}
+}
+	
+function plot() {
+	$('#equation').show();
 	a = Math.floor((Math.random() * 10) - 4);
 	if (a == 0) {
 		a = 1;
@@ -70,11 +153,11 @@ function plot() {
 	$('#newDialog').dialog("close");
 	initialization();
 	draw();
-		alert(" ans1= " +quadformulasln1 + " ans2= " +quadformulasln2);
 }
 
 function plotcustom() {
 
+	$('#equation').show();
 	a = $("#acoeff").val();
 	if (a == 0) {
 		a = 1;
@@ -85,7 +168,6 @@ function plotcustom() {
 	$('#newDialog').dialog("close");
 	initialization();
 	draw();
-		alert(" ans1= " +quadformulasln1 + " ans2= " +quadformulasln2);
 }
 
 function showGraph() {
@@ -99,13 +181,44 @@ function showGraph() {
 
 }
 
-function showQuadFormula() {
-	$("#quadformulacontain").toggle();
-	if ($("#quadformulacontain").is(":visible")) {
-		$('#showquadformula').text('Hide Quadratic Formula').button("refresh");
-	} else {
-		$('#showquadformula').text('Show Quadratic Formula').button("refresh");
-	}
+function solvequadformula1() {
+
+	$('#acoeffans').val(a);
+	$('#bcoeffans').val(b);
+	$('#ccoeffans').val(c);
+}
+
+function solvequadformula2() {
+
+	$('#bsqr').val(bsqr);
+	$('#ta').val(ta);
+	$('#fac').val(fac);
+	$('#mb').val(-b);
+}
+
+function solvequadformula3() {
+
+	$('#bsqrmfac').val(bsqrmfac);
+}
+
+function solvequadformula4() {
+
+	$('#sqrtbsqrfac').val(sqrtbsqrfac);
+}
+
+function solvequadformula5() {
+
+	$('#ans1').val(quadformulasln1);
+	$('#ans2').val(quadformulasln2);
+}
+
+
+function isSquare(n) {
+	return isInt(Math.sqrt(n));
+}
+
+function isInt(n) {
+	return n % 1 === 0;
 }
 
 function updateSlidera(x) {
@@ -321,14 +434,16 @@ function initialization() {
 	fac = 4 * a * c;
 	ta = 2 * a;
 	bsqrmfac = bsqr - fac;
+	sqrtbsqrfac = 0;
 	if (bsqrmfac > 0) {
 		hasrealroots = true;
-		quadformulasln1 = ((-1*b) + Math.sqrt(bsqrmfac))/ta;
-		quadformulasln2 = ((-1*b) - Math.sqrt(bsqrmfac))/ta;
+		quadformulasln1 = ((-1 * b) + Math.sqrt(bsqrmfac)) / ta;
+		quadformulasln2 = ((-1 * b) - Math.sqrt(bsqrmfac)) / ta;
+		sqrtbsqrfac = Math.sqrt(bsqrmfac);
 	} else if (bsqrmfac < 0) {
 		hasrealroots = false;
 	}
-	
+
 	xvertex = -b / (2 * a);
 	yvertex = a * (xvertex) * (xvertex) + b * (xvertex) + c;
 
@@ -457,4 +572,3 @@ function textOut() {
 onload = function() {
 	initialization();
 }
-
