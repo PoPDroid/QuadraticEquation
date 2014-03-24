@@ -41,7 +41,9 @@
 
 			<div data-role="content">
 				<a href="#newDialog" data-role="button" data-rel="dialog">New Equation</a>
-<br/><br/><br/>
+				<br/>
+				<br/>
+				<br/>
 
 				<font size="5px"><span id="myDiva"></span></font></p>
 				<fieldset class="ui-field-contain">
@@ -61,14 +63,29 @@
 						<font size="5px"><span id="quadformulaSpan" > $x=\frac{-b \pm \sqrt{b^2-4ac}}{2a}$</span></font></p>
 					</div>
 					<div id = "quadformula1">
-					<font size="5px"><span > $a=$</span>
-							<input maxlength="4" size="4" type="number"  id="acoeffans">
-							 $b=$
-							<input maxlength="4" size="4" type="number" id="bcoeffans">
-							 $c=$
-							<input maxlength="4" size="4" type="number" id="ccoeffans">
-							
-					</font>
+
+						<div  style="display: table-row" id="wrapper">
+							<div style="display: table-cell;" >
+								<font size="5px"><span > $a=$</span> </font>
+							</div>
+							<div style="width:60px ;display: table-cell;" id="c2">
+								<input maxlength="4" size="4" type="number"  id="acoeffans" value="0">
+							</div>
+
+							<div  style="display: table-cell;" >
+								<font size="5px"><span > $b=$</span> </font>
+							</div>
+							<div style="width:60px ;display: table-cell;" id="c2">
+								<input maxlength="4" size="4" type="number"  id="bcoeffans" value="0">
+							</div>
+
+							<div  style="display: table-cell;" >
+								<font size="5px"><span > $c=$</span> </font>
+							</div>
+							<div style="width:60px ;display: table-cell;" id="c2">
+								<input maxlength="4" size="4" type="number"  id="ccoeffans" value="0">
+							</div>
+						</div>
 					</div>
 
 				</div>
@@ -78,13 +95,15 @@
 						Show Factors
 					</button>
 				</div>
-				
+
 				<div id="squares" style="display:none">
 					<button id='showsquare' onclick="showSquare()"  type='button'>
 						Show Square
 					</button>
 				</div>
-<br/><br/><br/>
+				<br/>
+				<br/>
+				<br/>
 				<button id='showgraph' onclick="showGraph()"  type='button'>
 					Show Graph
 				</button>
