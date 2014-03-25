@@ -3,7 +3,7 @@
 	<head>
 
 		<title>Quadratic Equation Guide</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css">
 		<script src="js/jquery-1.8.3.min.js"></script>
@@ -54,133 +54,189 @@
 					</fieldset>
 
 					<div id="quadformula" >
-						<div id="quadformulacontain" align="center" style="border:2px solid; border-radius:25px;">
-							<br/>
-							<font size="5px"><span id="quadformulaSpan" > $x=\frac{-b \pm \sqrt{b^2-4ac}}{2a}$</span></font></p>
-						</div>
 
-						<div  id="quadformula1" style="display: table-row" >
-							<div style="display: table-cell;" >
-								<font size="5px"><span > $a=$</span> </font>
-							</div>
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="4" size="4" type="number"  id="acoeffans" value="0">
-							</div>
+						<font size="5px"><span id="customquadformulaspan" >
+								<div  id="quadformula1container"  >
+									STEP1: Find coefficients a , b and c.
+									<div  id="quadformula1" style="display: table-row" >
+										<div style="display: table-cell;" >
+											$a=$
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="4" size="4" type="number"  id="acoeffans" >
+										</div>
 
-							<div  style="display: table-cell;" >
-								<font size="5px"><span > $, b=$</span> </font>
-							</div>
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="4" size="4" type="number"  id="bcoeffans" value="0">
-							</div>
+										<div  style="display: table-cell;" >
+											$, b=$
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="4" size="4" type="number"  id="bcoeffans" >
+										</div>
 
-							<div  style="display: table-cell;" >
-								<font size="5px"><span > $, c=$</span> </font>
-							</div>
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="4" size="4" type="number"  id="ccoeffans" value="0">
-							</div>
-							<div style="display: table-cell;" >
+										<div  style="display: table-cell;" >
+											$, c=$
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="4" size="4" type="number"  id="ccoeffans" >
+										</div>
+									</div>
+									<div></div>
+									<div  style="display: table-row" >
+										<div  style="display: table-cell;" >
+											<button  onclick="checkformula1()"  type='button'>
+												Submit
+											</button>
+										</div>
+										<div style="display: table-cell;" >
 
-								<button  onclick="solvequadformula1()"  type='button'>
-									Solve
-								</button>
-							</div>
-						</div>
+											<button  onclick="solvequadformula1()"  type='button'>
+												Hint
+											</button>
+										</div>
+									</div>
 
-						<div ></div>
-						<div  id="quadformula2a" style="display: table-row" >
-							<div style="display: table-cell;" >
-								<font size="5px"><span > $\implies-b=$</span> </font>
-							</div>
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="5" size="5" type="number"  id="mb" value="0">
-							</div>
+								</div>
+								<div  id="quadformula2container" style="display:none" >
+									<div ></div>
+									STEP2: Plug in the values for a, b, and c into quadratic formula
+									<div  id="quadformula2a" style="display: table-row" >
+										<div style="display: table-cell;" >
+											$\implies-b=$
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="5" size="5" type="number"  id="mb" >
+										</div>
 
-							<div  style="display: table-cell;" >
-								<font size="5px"><span > $, 2a=$</span> </font>
-							</div>
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="5" size="5" type="number"  id="ta" value="0">
-							</div>
+										<div  style="display: table-cell;" >
+											$, b^2=$
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="8" size="6" type="number"  id="bsqr" >
+										</div>
 
-						</div>
-						<div ></div>
+									</div>
+									<div ></div>
 
-						<div  id="quadformula2b" style="display: table-row" >
+									<div  id="quadformula2b" style="display: table-row" >
 
-							<div  style="display: table-cell;" >
-								<font size="5px"><span > $, b^2=$</span> </font>
-							</div>
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="8" size="6" type="number"  id="bsqr" value="0">
-							</div>
+										<div  style="display: table-cell;" >
+											$, 4ac=$
+										</div>
+										<div style="width:80px ;display: table-cell;">
+											<input maxlength="84" size="5" type="number"  id="fac" >
+										</div>
+										<div  style="display: table-cell;" >
+											$, 2a=$
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="5" size="5" type="number"  id="ta" >
+										</div>
 
-							<div  style="display: table-cell;" >
-								<font size="5px"><span > $, 4ac=$</span> </font>
-							</div>
-							<div style="width:80px ;display: table-cell;">
-								<input maxlength="84" size="5" type="number"  id="fac" value="0">
-							</div>
-							<div style="display: table-cell;" >
+									</div>
+									<div></div>
+									<div  style="display: table-row" >
+										<div  style="display: table-cell;" >
+											<button  onclick="checkformula2()"  type='button'>
+												Submit
+											</button>
+										</div>
+										<div style="display: table-cell;" >
 
-								<button  onclick="solvequadformula2()"  type='button'>
-									Solve
-								</button>
-							</div>
-						</div>
-						<div ></div>
+											<button  onclick="solvequadformula2()"  type='button'>
+												Hint
+											</button>
+										</div>
+									</div>
+								</div> <div ></div>
+								<div  id="quadformula3container" style="display:none" >
+									<div  id="quadformula3" style="display: table-row" >
+										<div  style="display: table-cell;" >
+											$\implies b^2-4ac=$
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="8" size="6" type="number"  id="bsqrmfac" >
+										</div>
 
-						<div  id="quadformula3" style="display: table-row" >
-							<div  style="display: table-cell;" >
-								<font size="5px"><span > $\implies b^2-4ac=$</span> </font>
-							</div>
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="8" size="6" type="number"  id="bsqrmfac" value="0">
-							</div>
+									</div>
+									<div></div>
+									<div  style="display: table-row" >
+										<div  style="display: table-cell;" >
+											<button  onclick="checkformula3()"  type='button'>
+												Submit
+											</button>
+										</div>
+										<div style="display: table-cell;" >
 
-							<div style="display: table-cell;" >
+											<button  onclick="solvequadformula3()"  type='button'>
+												Hint
+											</button>
+										</div>
+									</div>
+								</div> <div ></div>
+								<div  id="quadformula4container" style="display:none" >
+									<div  id="quadformula4" style="display: table-row" >
+										<div  style="display: table-cell;" >
+											$\implies \sqrt{b^2-4ac}=$
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="8" size="6" type="number"  id="sqrtbsqrfac" >
+										</div>
 
-								<button onclick="solvequadformula3()"  type='button'>
-									Solve
-								</button>
-							</div>
+									</div>
+									<div></div>
+									<div  style="display: table-row" >
+										<div  style="display: table-cell;" >
+											<button  onclick="checkformula4()"  type='button'>
+												Submit
+											</button>
+										</div>
+										<div style="display: table-cell;" >
 
-						</div>
-						<div ></div>
+											<button  onclick="solvequadformula4()"  type='button'>
+												Hint
+											</button>
+										</div>
+									</div>
+								</div> <div ></div>
+								<div  id="quadformula5container" style="display:none" >
+									<div  id="quadformula5" style="display: table-row" >
+										<div  style="display: table-cell;" >
+											$\implies  \frac{-b \pm \sqrt{b^2-4ac}}{2a} = $
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="8" size="6" type="number"  id="ans1" >
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											$or$
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="8" size="6" type="number"  id="ans2" >
+										</div>
 
-						<div  id="quadformula4" style="display: table-row" >
-							<div  style="display: table-cell;" >
-								<font size="5px"><span > $\implies \sqrt{b^2-4ac}=$</span> </font>
-							</div>
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="8" size="6" type="number"  id="sqrtbsqrfac" value="0">
-							</div>
-							<button onclick="solvequadformula4()"  type='button'>
-								Solve
-							</button>
+									</div>
+									<div></div>
+									<div  style="display: table-row" >
+										<div  style="display: table-cell;" >
+											<button  onclick="checkformula5()"  type='button'>
+												Submit
+											</button>
+										</div>
+										<div style="display: table-cell;" >
 
-						</div>
-						<div ></div>
-						<div  id="quadformula5" style="display: table-row" >
-							<div  style="display: table-cell;" >
-								<font size="5px"><span > $\implies  \frac{-b \pm \sqrt{b^2-4ac}}{2a} = $</span></font></p>
-							</div>
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="8" size="6" type="number"  id="ans1" value="0">
-							</div>
-							<div style="width:80px ;display: table-cell;" >
-								<font size="5px"><span > $or$</span></font></p>
-							</div>
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="8" size="6" type="number"  id="ans2" value="0">
-							</div>
-							<button onclick="solvequadformula5()"  type='button'>
-								Solve
-							</button>
+											<button  onclick="solvequadformula5()"  type='button'>
+												Hint
+											</button>
+										</div>
+									</div>
+								</div>
+								<div  align="left" >
+									<font size="5px" color="red"><span id="quadFormulaAns"></span></font></p>
+								</div>
+								<div id="canvascontain" align="center" style="display:none">
+									<canvas id="canvas2" width="500" height="500" style="border:solid 1px #0000ff">
 
-						</div>
-
+									</canvas>
+								</div> </span></font>
 					</div>
 
 					<div id="factoring" style="display:none">
@@ -195,16 +251,6 @@
 						</button>
 					</div>
 					<br/>
-					<br/>
-					<br/>
-					<button id='showgraph' onclick="showGraph()"  type='button'>
-						Show Graph
-					</button>
-					<div id="canvascontain" align="center" style="display:none">
-						<canvas id="canvas2" width="500" height="500" style="border:solid 1px #0000ff">
-
-						</canvas>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -214,42 +260,42 @@
 				<h1>New Equation</h1>
 			</div>
 			<div data-role="content" align="center">
-					<fieldset data-role="controlgroup" data-type="horizontal" class="radiobutton">
+				<fieldset data-role="controlgroup" data-type="horizontal" class="radiobutton">
 
-						<input type="radio" name="start-radio" id="radio-choice-1" value="random" checked="checked"  />
-						<label for="radio-choice-1">Generate Equation</label>
+					<input type="radio" name="start-radio" id="radio-choice-1" value="random" checked="checked"  />
+					<label for="radio-choice-1">Generate</label>
 
-						<input type="radio" name="start-radio" id="radio-choice-2" value="custom"  />
-						<label for="radio-choice-2">Insert Equation</label>
+					<input type="radio" name="start-radio" id="radio-choice-2" value="custom"  />
+					<label for="radio-choice-2">Insert Values</label>
 
-					</fieldset>
-			<div id="customquadfunction" style="display:none">
-				<font size="5px"><span id="customquadfunctionSpan" >
-						<div data-role="fieldcontain">
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="4" size="4" type="number" id="acoeff">
-							</div>
+				</fieldset>
+				<div id="customquadfunction" style="display:none">
+					<font size="5px"><span id="customquadfunctionSpan" >
+							<div data-role="fieldcontain">
+								<div style="width:80px ;display: table-cell;" >
+									<input maxlength="4" size="4" type="number" id="acoeff">
+								</div>
 
-							<div style="display: table-cell;" >
-								<font size="5px"><span > $x^2$</span> </font>
-							</div>
+								<div style="display: table-cell;" >
+									$x^2$
+								</div>
 
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="4" size="4" type="number" id="bcoeff">
-							</div>
-							<div  style="display: table-cell;" >
-								<font size="5px"><span > $x$</span> </font>
-							</div>
+								<div style="width:80px ;display: table-cell;" >
+									<input maxlength="4" size="4" type="number" id="bcoeff">
+								</div>
+								<div  style="display: table-cell;" >
+									$x$
+								</div>
 
-							<div style="width:80px ;display: table-cell;" >
-								<input maxlength="4" size="4" type="number" id="ccoeff">
-							</div>
-							<div  style="display: table-cell;" >
-								<font size="5px"><span > $=0$</span> </font>
-							</div>
+								<div style="width:80px ;display: table-cell;" >
+									<input maxlength="4" size="4" type="number" id="ccoeff">
+								</div>
+								<div  style="display: table-cell;" >
+									$=0$
+								</div>
 
-					</span></font></p>
-			</div>
+						</span></font></p>
+				</div>
 			</div>
 			<button id='btnsubmit' onclick="plotoption()"  type='button'>
 				Submit

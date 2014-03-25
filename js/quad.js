@@ -46,9 +46,18 @@ var sqrtbsqrfac;
 var hasrealroots;
 var quadformulasln1;
 var quadformulasln2;
+var quadformulapartial;
+
 
 $(document).ready(function() {
-	keep checking values if answer is correct. if so, remove submit button and change input to label
+	//keep checking values if answer is correct. if so, remove submit button and change input to label
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	$("#method").change(function() {
@@ -57,6 +66,7 @@ $(document).ready(function() {
 		$("#squares").hide();
 		if ($(this).val() == "quadformula") {
 			$("#quadformula").show();
+			$('#quadformula1container').show();
 		}
 		if ($(this).val() == "squares") {
 			if (isSquare(c) && isSquare(a) && b == 0) {
@@ -153,7 +163,9 @@ function plot() {
 	$('#newDialog').dialog("close");
 	initialization();
 	draw();
+	resetQuadFormula();
 }
+
 
 function plotcustom() {
 
@@ -168,6 +180,25 @@ function plotcustom() {
 	$('#newDialog').dialog("close");
 	initialization();
 	draw();
+	resetQuadFormula();
+	
+}
+
+function resetQuadFormula() {
+	$('#quadformula1container').show();
+	$('#canvascontain').hide();
+	$('#acoeffans').val("");
+	$('#bcoeffans').val("");
+	$('#ccoeffans').val("");
+	$('#bsqr').val("");
+	$('#ta').val("");
+	$('#fac').val("");
+	$('#mb').val("");
+	$('#bsqrmfac').val("");
+	$('#ans1').val("");
+	$('#ans2').val("");
+	
+	document.getElementById('quadFormulaAns').innerHTML = "";
 }
 
 function showGraph() {
@@ -181,11 +212,36 @@ function showGraph() {
 
 }
 
+function checkformula1() {
+	
+	if($('#acoeffans').val()==a && $('#bcoeffans').val()==b && $('#ccoeffans').val()==c){
+		solvequadformula1();
+	}
+	else{
+		alert("wrong");
+	}
+}
+
 function solvequadformula1() {
 
 	$('#acoeffans').val(a);
 	$('#bcoeffans').val(b);
 	$('#ccoeffans').val(c);
+	$('#quadformula2container').show();
+	$('#quadformula1container').hide();
+	
+	quadformulapartial = '$a='+ a+',\\; b='+b+',\\; c='+ c+'$';
+	document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+}
+
+function checkformula2() {
+	if($('#bsqr').val()==bsqr && $('#ta').val()==ta && $('#fac').val()==fac && $('#mb').val()==-b){
+		solvequadformula2();
+	}
+	else{
+		alert("wrong");
+	}
 }
 
 function solvequadformula2() {
@@ -194,22 +250,74 @@ function solvequadformula2() {
 	$('#ta').val(ta);
 	$('#fac').val(fac);
 	$('#mb').val(-b);
+	$('#quadformula3container').show();
+	$('#quadformula2container').hide();
+	//quadformulapartial = '$\\implies  \\frac{'+ -b+' \\pm \\sqrt{'+b+'^2 -(4)('+ a+')('+ c+')}}{(2)('+ a+')} = $';
+	quadformulapartial += '<br\> $\\implies  -b='+ -b+',\\; b^2='+bsqr+'$ <br\>  $4ac='+ fac+',\\; 2a='+ ta+'$';
+	document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+}
+
+function checkformula3() {
+	if($('#bsqrmfac').val()==bsqrmfac){
+		solvequadformula3();
+	}
+	else{
+		alert("wrong");
+	}
 }
 
 function solvequadformula3() {
 
 	$('#bsqrmfac').val(bsqrmfac);
+	$('#quadformula4container').show();
+	$('#quadformula3container').hide();
+	quadformulapartial += '<br\> $\\implies b^2 - 4ac='+bsqrmfac+'$';
+	document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+}
+
+function checkformula4() {
+	if($('#sqrtbsqrfac').val()==sqrtbsqrfac){
+		solvequadformula4();
+	}
+	else{
+		alert("wrong");
+	}
 }
 
 function solvequadformula4() {
+	if(bsqrmfac>=0){
+		$('#sqrtbsqrfac').val(sqrtbsqrfac);
+		$('#quadformula5container').show();
+		$('#quadformula4container').hide();
+		quadformulapartial += '<br\> $\\implies \\sqrt{b^2 - 4ac}='+sqrtbsqrfac+'$';
+		document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
+		MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+	}
+	else{
+		alert('no real roots');
+	}
+}
 
-	$('#sqrtbsqrfac').val(sqrtbsqrfac);
+function checkformula5() {
+	if($('#ans1').val()==quadformulasln1 && $('#ans2').val()==quadformulasln2){
+		solvequadformula5();
+	}
+	else{
+		alert("wrong");
+	}
 }
 
 function solvequadformula5() {
 
 	$('#ans1').val(quadformulasln1);
 	$('#ans2').val(quadformulasln2);
+	$('#canvascontain').show();
+	$('#quadformula5container').hide();
+	quadformulapartial += '<br\> $\\implies  \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a} =$'+quadformulasln1 +' or '+quadformulasln2;
+	document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 }
 
 
@@ -435,7 +543,7 @@ function initialization() {
 	ta = 2 * a;
 	bsqrmfac = bsqr - fac;
 	sqrtbsqrfac = 0;
-	if (bsqrmfac > 0) {
+	if (bsqrmfac >= 0) {
 		hasrealroots = true;
 		quadformulasln1 = ((-1 * b) + Math.sqrt(bsqrmfac)) / ta;
 		quadformulasln2 = ((-1 * b) - Math.sqrt(bsqrmfac)) / ta;
