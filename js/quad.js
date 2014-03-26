@@ -47,19 +47,11 @@ var hasrealroots;
 var quadformulasln1;
 var quadformulasln2;
 var quadformulapartial;
+var factoringpartial;
+var factorspartial = "";
 
 
 $(document).ready(function() {
-	//keep checking values if answer is correct. if so, remove submit button and change input to label
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	$("#method").change(function() {
 		$("#quadformula").hide();
 		$("#factoring").hide();
@@ -78,41 +70,43 @@ $(document).ready(function() {
 			}
 		}
 		if ($(this).val() == "factoring") {
+			
+			// we must get a into a positivE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			// we must simplify equation after generating or inserting it (removing common factor and bringing x to +ve)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//will not work if a is -ve
+			
+			
 			var hasfactors = false;
-			$.each(getFactors, function(){
-				//find out if can be factored
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			});
+			
 			if (bsqrmfac > 0) {
+				$.each(getFactors(Math.abs(a)), function(){
+				var afactors = this;
+				$.each(getFactors(Math.abs(c)), function(){
+					var cfactors = this;
+					
+					//4 cases -> 	1: both +, 		2: both -, 		3 :b+ and c-, 		4: b- and c +
+					if(b>=0 && c>=0){
+						factorspartial+= " ("+afactors[0] + " + " +cfactors[0] + ")("+afactors[1] + " + " +cfactors[1] + ")\n";
+					}
+					else if(b<0 && c<0){
+						factorspartial+= " ("+afactors[0] + " - " +cfactors[0] + ")("+afactors[1] + " - " +cfactors[1] + ")\n";
+					}
+					else if((b<0 && c>=0) || (b>=0 && c<0)){
+						factorspartial+= " ("+afactors[0] + " + " +cfactors[0] + ")("+afactors[1] + " - " +cfactors[1] + ")\n" ;
+						factorspartial+= " ("+afactors[0] + " - " +cfactors[0] + ")("+afactors[1] + " + " +cfactors[1] + ")\n" ;
+					}
+				});
 				
+			});
+			alert(factorspartial);
 				$("#factoring").show();
+				$('#factoring1container').show();
 			} else {
 				$("#method").val("quadformula").selectmenu('refresh');
 				alert("Not real roots");
 				$("#quadformula").show();
 			}
+
 		}
 	});
 
@@ -132,10 +126,13 @@ function getFactors(integer){
   quotient = 0;
 
   for(var i = 1; i <= integer; i++){
+  	var factor = [];
     quotient = integer/i;
 
     if(quotient === Math.floor(quotient)){
-      factors.push(i); 
+    	factor.push(i);
+    	factor.push(integer/i);
+      factors.push(factor); 
     }
   }
   return factors;
@@ -187,6 +184,10 @@ function plotcustom() {
 function resetQuadFormula() {
 	$('#quadformula1container').show();
 	$('#canvascontain').hide();
+	$('#quadformula2container').hide();
+	$('#quadformula3container').hide();
+	$('#quadformula4container').hide();
+	$('#quadformula5container').hide();
 	$('#acoeffans').val("");
 	$('#bcoeffans').val("");
 	$('#ccoeffans').val("");
@@ -198,7 +199,7 @@ function resetQuadFormula() {
 	$('#ans1').val("");
 	$('#ans2').val("");
 	
-	document.getElementById('quadFormulaAns').innerHTML = "";
+	//document.getElementById('quadFormulaAns').innerHTML = "";
 }
 
 function showGraph() {
@@ -230,9 +231,11 @@ function solvequadformula1() {
 	$('#quadformula2container').show();
 	$('#quadformula1container').hide();
 	
-	quadformulapartial = '$a='+ a+',\\; b='+b+',\\; c='+ c+'$';
+	var stringOut = stringquadratic();
+	quadformulapartial = stringOut + '<br\><br\> $a='+ a+',\\; b='+b+',\\; c='+ c+'$';
 	document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
 	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+	
 }
 
 function checkformula2() {
@@ -252,8 +255,7 @@ function solvequadformula2() {
 	$('#mb').val(-b);
 	$('#quadformula3container').show();
 	$('#quadformula2container').hide();
-	//quadformulapartial = '$\\implies  \\frac{'+ -b+' \\pm \\sqrt{'+b+'^2 -(4)('+ a+')('+ c+')}}{(2)('+ a+')} = $';
-	quadformulapartial += '<br\> $\\implies  -b='+ -b+',\\; b^2='+bsqr+'$ <br\>  $4ac='+ fac+',\\; 2a='+ ta+'$';
+	quadformulapartial += '<br\> $\\implies  -b='+ -b+',\\; b^2='+bsqr+',$ <br\>  $4ac='+ fac+',\\; 2a='+ ta+'$';
 	document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
 	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 }
@@ -297,6 +299,7 @@ function solvequadformula4() {
 	}
 	else{
 		alert('no real roots');
+	$('#canvascontain').show();
 	}
 }
 
@@ -318,6 +321,39 @@ function solvequadformula5() {
 	quadformulapartial += '<br\> $\\implies  \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a} =$'+quadformulasln1 +' or '+quadformulasln2;
 	document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
 	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+}
+
+function checkfactoring1() {
+	
+	if($('#acoeffans').val()==a && $('#bcoeffans').val()==b && $('#ccoeffans').val()==c){
+		solvequadformula1();
+	}
+	else{
+		alert("wrong");
+	}
+}
+
+function solvefactoring1() {
+	var gcf = getGCF(new Array(a,b,c));
+	alert(gcf);
+	
+}
+
+function getGCF(numbers){
+	var result = numbers[0];
+	for(var i = 1; i < numbers.length; i++){
+	    result = gcd(result, numbers[i]);
+	}
+	return result;
+}
+
+function gcd(x, y) {
+	while (y != 0) {
+		var z = x % y;
+		x = y;
+		y = z;
+	}
+	return x;
 }
 
 
@@ -635,6 +671,16 @@ function draw(x) {
 
 function textOut() {
 
+	document.getElementById('quadFormulaAns').innerHTML = stringquadratic();
+	document.getElementById('factoringAns').innerHTML = stringquadratic();
+	document.getElementById('squaresAns').innerHTML = stringquadratic();
+
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+
+}
+
+function stringquadratic(){
+	
 	var stringOut = "";
 
 	var sta = a.toString();
@@ -669,12 +715,7 @@ function textOut() {
 		stc = ""
 	}
 
-	//stringOut='$'+'f(x)='+sta+'x^2'+stb+stc+'$';
-	stringOut = '$' + sta + 'x^2' + stb + stc + '=0$';
-	document.getElementById('myDiva').innerHTML = stringOut;
-
-	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-
+	return  '$' + sta + 'x^2' + stb + stc + '=0$';
 }
 
 onload = function() {

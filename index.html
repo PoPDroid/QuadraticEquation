@@ -57,7 +57,7 @@
 
 						<font size="5px"><span id="customquadformulaspan" >
 								<div  id="quadformula1container"  >
-									STEP1: Find coefficients a , b and c.
+									STEP1: Find coefficients a , b and c of equation in the form of $ax^2+bx+c=0$
 									<div  id="quadformula1" style="display: table-row" >
 										<div style="display: table-cell;" >
 											$a=$
@@ -98,7 +98,7 @@
 								</div>
 								<div  id="quadformula2container" style="display:none" >
 									<div ></div>
-									STEP2: Plug in the values for a, b, and c into quadratic formula
+									STEP2: Plug in the values for a, b, and c into parts $(-b,b^2,4ac,2a)$ of quadratic formula $\frac{-b \pm \sqrt{b^2-4ac}}{2a}$
 									<div  id="quadformula2a" style="display: table-row" >
 										<div style="display: table-cell;" >
 											$\implies-b=$
@@ -117,8 +117,7 @@
 									</div>
 									<div ></div>
 
-									<div  id="quadformula2b" style="display: table-row" >
-
+									<div  id="quadformula2b" style="display: table-row" >		
 										<div  style="display: table-cell;" >
 											$, 4ac=$
 										</div>
@@ -149,6 +148,7 @@
 									</div>
 								</div> <div ></div>
 								<div  id="quadformula3container" style="display:none" >
+							STEP2 (cont'd): Plug in the values for a, b, and c into part $b^2,4ac$ of quadratic formula $\frac{-b \pm \sqrt{b^2-4ac}}{2a}$
 									<div  id="quadformula3" style="display: table-row" >
 										<div  style="display: table-cell;" >
 											$\implies b^2-4ac=$
@@ -174,6 +174,7 @@
 									</div>
 								</div> <div ></div>
 								<div  id="quadformula4container" style="display:none" >
+							STEP2 (cont'd): Plug in the values for a, b, and c into part $\sqrt{b^2-4ac}$ of quadratic formula $\frac{-b \pm \sqrt{b^2-4ac}}{2a}$
 									<div  id="quadformula4" style="display: table-row" >
 										<div  style="display: table-cell;" >
 											$\implies \sqrt{b^2-4ac}=$
@@ -199,6 +200,7 @@
 									</div>
 								</div> <div ></div>
 								<div  id="quadformula5container" style="display:none" >
+							STEP3: Plug in answers into quadratic formula $\frac{-b \pm \sqrt{b^2-4ac}}{2a}$
 									<div  id="quadformula5" style="display: table-row" >
 										<div  style="display: table-cell;" >
 											$\implies  \frac{-b \pm \sqrt{b^2-4ac}}{2a} = $
@@ -229,28 +231,95 @@
 										</div>
 									</div>
 								</div>
-								<div  align="left" >
+								<div  align="center" >
 									<font size="5px" color="red"><span id="quadFormulaAns"></span></font></p>
 								</div>
+								</span></font>
+					</div>
+
+					<div id="factoring" style="display:none">
+						<font size="5px"><span >
+								<div  id="factoring1scontainer"  >
+									STEP1: Simplify equation by taking out greatest common factor$
+									<div  id="factoring1" style="display: table-row" >
+
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="4" size="4" type="number"  id="gcf" >
+										</div>
+
+										<div  style="display: table-cell;" >
+											$($
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="4" size="4" type="number"  id="newa" >
+										</div>
+
+										<div  style="display: table-cell;" >
+											$x^2 $
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="4" size="4" type="number"  id="newb" >
+										</div>
+										
+										<div  style="display: table-cell;" >
+											$x$
+										</div>
+										
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="4" size="4" type="number"  id="newc" >
+										</div>
+										<div  style="display: table-cell;" >
+											$)=0$
+										</div>
+									</div>
+									<div></div>
+									<div  style="display: table-row" >
+										<div  style="display: table-cell;" >
+											<button  onclick="checkformula1()"  type='button'>
+												Submit
+											</button>
+										</div>
+										<div style="display: table-cell;" >
+
+											<button  onclick="solvequadformula1()"  type='button'>
+												Hint
+											</button>
+										</div>
+									</div>
+
+									<div></div>
+									<div  style="display: table-row" >
+										<div  style="display: table-cell;" >
+											<button  onclick="checkfactoring1()"  type='button'>
+												Submit
+											</button>
+										</div>
+										<div style="display: table-cell;" >
+
+											<button  onclick="solvefactoring1()"  type='button'>
+												Hint
+											</button>
+										</div>
+									</div>
+								</div>
+								<div  align="center" >
+									<font size="5px" color="red"><span id="factoringAns"></span></font></p>
+								</div>
+						</span></font>
+					</div>
+
+					<div id="squares" style="display:none">
+								<div  align="center" >
+									<font size="5px" color="red"><span id="squaresAns"></span></font></p>
+								</div>
+					</div>
+					
+					<br/>
 								<div id="canvascontain" align="center" style="display:none">
 									<canvas id="canvas2" width="500" height="500" style="border:solid 1px #0000ff">
 
 									</canvas>
-								</div> </span></font>
-					</div>
-
-					<div id="factoring" style="display:none">
-						<button id='showfactors' onclick="showFactors()"  type='button'>
-							Show Factors
-						</button>
-					</div>
-
-					<div id="squares" style="display:none">
-						<button id='showsquare' onclick="showSquare()"  type='button'>
-							Show Square
-						</button>
-					</div>
-					<br/>
+								</div> 
 				</div>
 			</div>
 		</div>
