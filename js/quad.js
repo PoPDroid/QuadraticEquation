@@ -48,8 +48,8 @@ var quadformulasln1;
 var quadformulasln2;
 var quadformulapartial;
 var factoringpartial;
+var gcf;
 var factorspartial = "";
-
 
 $(document).ready(function() {
 	$("#method").change(function() {
@@ -70,40 +70,19 @@ $(document).ready(function() {
 			}
 		}
 		if ($(this).val() == "factoring") {
-			
+
 			// we must get a into a positivE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			// we must simplify equation after generating or inserting it (removing common factor and bringing x to +ve)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			//will not work if a is -ve
-			
-			
+
 			var hasfactors = false;
-			
-			if (bsqrmfac > 0) {
-				$.each(getFactors(Math.abs(a)), function(){
-				var afactors = this;
-				$.each(getFactors(Math.abs(c)), function(){
-					var cfactors = this;
-					
-					//4 cases -> 	1: both +, 		2: both -, 		3 :b+ and c-, 		4: b- and c +
-					if(b>=0 && c>=0){
-						factorspartial+= " ("+afactors[0] + " + " +cfactors[0] + ")("+afactors[1] + " + " +cfactors[1] + ")\n";
-					}
-					else if(b<0 && c<0){
-						factorspartial+= " ("+afactors[0] + " - " +cfactors[0] + ")("+afactors[1] + " - " +cfactors[1] + ")\n";
-					}
-					else if((b<0 && c>=0) || (b>=0 && c<0)){
-						factorspartial+= " ("+afactors[0] + " + " +cfactors[0] + ")("+afactors[1] + " - " +cfactors[1] + ")\n" ;
-						factorspartial+= " ("+afactors[0] + " - " +cfactors[0] + ")("+afactors[1] + " + " +cfactors[1] + ")\n" ;
-					}
-				});
-				
-			});
-			alert(factorspartial);
+
+			if (bsqrmfac >= 0) {
 				$("#factoring").show();
 				$('#factoring1container').show();
 			} else {
 				$("#method").val("quadformula").selectmenu('refresh');
-				alert("Not real roots");
+				alert("no real roots");
 				$("#quadformula").show();
 			}
 
@@ -121,33 +100,32 @@ $(document).ready(function() {
 	});
 });
 
-function getFactors(integer){
-  var factors = [],
-  quotient = 0;
+function getFactors(integer) {
+	var factors = [], quotient = 0;
 
-  for(var i = 1; i <= integer; i++){
-  	var factor = [];
-    quotient = integer/i;
+	for (var i = 1; i <= integer; i++) {
+		var factor = [];
+		quotient = integer / i;
 
-    if(quotient === Math.floor(quotient)){
-    	factor.push(i);
-    	factor.push(integer/i);
-      factors.push(factor); 
-    }
-  }
-  return factors;
+		if (quotient === Math.floor(quotient)) {
+			factor.push(i);
+			factor.push(integer / i);
+			factors.push(factor);
+		}
+	}
+	return factors;
 }
 
 function plotoption() {
 
-		if ($('input:radio[name=start-radio]:checked').val() == "random") {
-			plot();
-		} else if ($('input:radio[name=start-radio]:checked').val() == "custom") {
-			plotcustom() ;
+	if ($('input:radio[name=start-radio]:checked').val() == "random") {
+		plot();
+	} else if ($('input:radio[name=start-radio]:checked').val() == "custom") {
+		plotcustom();
 
-		}
+	}
 }
-	
+
 function plot() {
 	$('#equation').show();
 	a = Math.floor((Math.random() * 10) - 4);
@@ -160,9 +138,10 @@ function plot() {
 	$('#newDialog').dialog("close");
 	initialization();
 	draw();
+	$("#method").val("quadformula").selectmenu('refresh');
 	resetQuadFormula();
+	resetFactoring();
 }
-
 
 function plotcustom() {
 
@@ -177,8 +156,9 @@ function plotcustom() {
 	$('#newDialog').dialog("close");
 	initialization();
 	draw();
+	$("#method").val("quadformula").selectmenu('refresh');
 	resetQuadFormula();
-	
+	resetFactoring();
 }
 
 function resetQuadFormula() {
@@ -198,7 +178,27 @@ function resetQuadFormula() {
 	$('#bsqrmfac').val("");
 	$('#ans1').val("");
 	$('#ans2').val("");
-	
+
+	//document.getElementById('quadFormulaAns').innerHTML = "";
+}
+
+function resetFactoring() {
+	$('#factoring1container').show();
+	$('#canvascontain').hide();
+	$('#factoring1container').hide();
+	$('#factoring1container').hide();
+	$('#factoring1container').hide();
+	$('#factoring1container').hide();
+	$('#gcf').val("");
+	$('#newa').val("");
+	$('#newb').val("");
+	$('#newc').val("");
+	$('#gcf2').val("");
+	$('#faca1').val("");
+	$('#facc1').val("");
+	$('#faca2').val("");
+	$('#facc2').val("");
+
 	//document.getElementById('quadFormulaAns').innerHTML = "";
 }
 
@@ -214,11 +214,10 @@ function showGraph() {
 }
 
 function checkformula1() {
-	
-	if($('#acoeffans').val()==a && $('#bcoeffans').val()==b && $('#ccoeffans').val()==c){
+
+	if ($('#acoeffans').val() == a && $('#bcoeffans').val() == b && $('#ccoeffans').val() == c) {
 		solvequadformula1();
-	}
-	else{
+	} else {
 		alert("wrong");
 	}
 }
@@ -230,19 +229,17 @@ function solvequadformula1() {
 	$('#ccoeffans').val(c);
 	$('#quadformula2container').show();
 	$('#quadformula1container').hide();
-	
-	var stringOut = stringquadratic();
-	quadformulapartial = stringOut + '<br\><br\> $a='+ a+',\\; b='+b+',\\; c='+ c+'$';
+	var stringOut = stringquadratic(a, b, c);
+	quadformulapartial = stringOut + '<br\><br\> step 1<br\> $a=' + a + ',\\; b=' + b + ',\\; c=' + c + '$';
 	document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
 	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-	
+
 }
 
 function checkformula2() {
-	if($('#bsqr').val()==bsqr && $('#ta').val()==ta && $('#fac').val()==fac && $('#mb').val()==-b){
+	if ($('#bsqr').val() == bsqr && $('#ta').val() == ta && $('#fac').val() == fac && $('#mb').val() == -b) {
 		solvequadformula2();
-	}
-	else{
+	} else {
 		alert("wrong");
 	}
 }
@@ -255,16 +252,20 @@ function solvequadformula2() {
 	$('#mb').val(-b);
 	$('#quadformula3container').show();
 	$('#quadformula2container').hide();
-	quadformulapartial += '<br\> $\\implies  -b='+ -b+',\\; b^2='+bsqr+',$ <br\>  $4ac='+ fac+',\\; 2a='+ ta+'$';
+	quadformulapartial += '<br\><br\> step 2 <br\>$ -b=-('+b+ ')=' + -b + ',$ <br\>  $\\; b^2=('+b+')^2=' + bsqr + ',$ <br\>  $4ac= (4)('+a+')('+c+')=' + fac + ',$ <br\>  $2a=(2)('+a+')=' + ta + '$';
+	
+	
+	
+	
+	
 	document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
 	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 }
 
 function checkformula3() {
-	if($('#bsqrmfac').val()==bsqrmfac){
+	if ($('#bsqrmfac').val() == bsqrmfac) {
 		solvequadformula3();
-	}
-	else{
+	} else {
 		alert("wrong");
 	}
 }
@@ -274,40 +275,37 @@ function solvequadformula3() {
 	$('#bsqrmfac').val(bsqrmfac);
 	$('#quadformula4container').show();
 	$('#quadformula3container').hide();
-	quadformulapartial += '<br\> $\\implies b^2 - 4ac='+bsqrmfac+'$';
+	quadformulapartial += '<br\><br\> step 3<br\>$b^2 - 4ac='+ bsqr + '-'+fac + '=' + bsqrmfac + '$';
 	document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
 	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 }
 
 function checkformula4() {
-	if($('#sqrtbsqrfac').val()==sqrtbsqrfac){
+	if ($('#sqrtbsqrfac').val() == sqrtbsqrfac) {
 		solvequadformula4();
-	}
-	else{
+	} else {
 		alert("wrong");
 	}
 }
 
 function solvequadformula4() {
-	if(bsqrmfac>=0){
+	if (bsqrmfac >= 0) {
 		$('#sqrtbsqrfac').val(sqrtbsqrfac);
 		$('#quadformula5container').show();
 		$('#quadformula4container').hide();
-		quadformulapartial += '<br\> $\\implies \\sqrt{b^2 - 4ac}='+sqrtbsqrfac+'$';
+		quadformulapartial += '<br\><br\>step 4 <br\>$ \\sqrt{b^2 - 4ac}=' + sqrtbsqrfac + '$';
 		document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
 		MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-	}
-	else{
+	} else {
 		alert('no real roots');
-	$('#canvascontain').show();
+		$('#canvascontain').show();
 	}
 }
 
 function checkformula5() {
-	if($('#ans1').val()==quadformulasln1 && $('#ans2').val()==quadformulasln2){
+	if ($('#ans1').val() == quadformulasln1 && $('#ans2').val() == quadformulasln2) {
 		solvequadformula5();
-	}
-	else{
+	} else {
 		alert("wrong");
 	}
 }
@@ -318,31 +316,102 @@ function solvequadformula5() {
 	$('#ans2').val(quadformulasln2);
 	$('#canvascontain').show();
 	$('#quadformula5container').hide();
-	quadformulapartial += '<br\> $\\implies  \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a} =$'+quadformulasln1 +' or '+quadformulasln2;
+	if(quadformulasln1!=quadformulasln2)
+	quadformulapartial += '<br\> $\\implies  \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a} =$' + quadformulasln1 + ' or ' + quadformulasln2;
+	else
+	quadformulapartial += '<br\> $\\implies  \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a} =$' + quadformulasln1;
 	document.getElementById('quadFormulaAns').innerHTML = quadformulapartial;
 	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 }
 
 function checkfactoring1() {
-	
-	if($('#acoeffans').val()==a && $('#bcoeffans').val()==b && $('#ccoeffans').val()==c){
-		solvequadformula1();
-	}
-	else{
+	var newa = $('#newa').val();
+	var newb = $('#newb').val();
+	var newc = $('#newc').val();
+	gcf = $('#gcf').val();
+	var pa = Math.abs(a);
+	var pb = Math.abs(b);
+	var pc = Math.abs(c);
+	var sign = 1;
+	if (a < 0)
+		sign = -1;
+
+	if (gcf == sign * getGCF(new Array(pa, pb, pc)) && (gcf * newa) == a && (gcf * newb) == b && (gcf * newc) == c) {
+		solvefactoring1();
+	} else {
 		alert("wrong");
 	}
 }
 
 function solvefactoring1() {
-	var gcf = getGCF(new Array(a,b,c));
-	alert(gcf);
-	
+	var pa = Math.abs(a);
+	var pb = Math.abs(b);
+	var pc = Math.abs(c);
+	var sign = 1;
+	if (a < 0)
+		sign = -1;
+	gcf = sign * getGCF(new Array(pa, pb, pc));
+	$('#factoring2container').show();
+	$('#factoring1container').hide();
+	var stringOut = stringquadratic(a, b, c);
+	var stringOut2 = stringquadratic(a / gcf, b / gcf, c / gcf);
+	if (gcf == 1) {
+		alert("already simplified");
+	} else {
+		$('#gcfcontain').show();
+		factoringpartial = stringOut + '<br\> $\\implies (' + gcf + ')($' + stringOut2 + '$)$';
+		document.getElementById('factoringAns').innerHTML = factoringpartial;
+		MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+	}
+
 }
 
-function getGCF(numbers){
+// rem to hide  $('#gcfcontain').show();
+
+function solvefactoring2() {
+	$('#factoring3container').show();
+	$('#factoring2container').hide();
+	$('#gcfcontain').hide();
+
+	$.each(getFactors(Math.abs(a/gcf)), function() {
+		var afactors = this;
+		$.each(getFactors(Math.abs(c/gcf)), function() {
+			var cfactors = this;
+
+//do this
+
+
+
+			//4 cases -> 	1: both +, 		2: both -, 		3 :b+ and c-, 		4: b- and c +
+			if (b >= 0 && c >= 0) {
+				factorspartial += " (" + afactors[0] + " + " + cfactors[0] + ")(" + afactors[1] + " + " + cfactors[1] + ")\n";
+			} else if (b < 0 && c < 0) {
+				factorspartial += " (" + afactors[0] + " - " + cfactors[0] + ")(" + afactors[1] + " - " + cfactors[1] + ")\n";
+			} else if ((b < 0 && c >= 0) || (b >= 0 && c < 0)) {
+				factorspartial += " (" + afactors[0] + " + " + cfactors[0] + ")(" + afactors[1] + " - " + cfactors[1] + ")\n";
+				factorspartial += " (" + afactors[0] + " - " + cfactors[0] + ")(" + afactors[1] + " + " + cfactors[1] + ")\n";
+			}
+		});
+
+	});
+	alert(factorspartial);
+
+	var stringOut2 = stringquadratic(a / gcf, b / gcf, c / gcf);
+	if (gcf == 1) {
+		alert("already simplified");
+	} else {
+		$('#gcfcontain').show();
+		factoringpartial = stringOut + '<br\> $\\implies (' + gcf + ')($' + stringOut2 + '$)$';
+		document.getElementById('factoringAns').innerHTML = factoringpartial;
+		MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+	}
+
+}
+
+function getGCF(numbers) {
 	var result = numbers[0];
-	for(var i = 1; i < numbers.length; i++){
-	    result = gcd(result, numbers[i]);
+	for (var i = 1; i < numbers.length; i++) {
+		result = gcd(result, numbers[i]);
 	}
 	return result;
 }
@@ -355,7 +424,6 @@ function gcd(x, y) {
 	}
 	return x;
 }
-
 
 function isSquare(n) {
 	return isInt(Math.sqrt(n));
@@ -671,51 +739,51 @@ function draw(x) {
 
 function textOut() {
 
-	document.getElementById('quadFormulaAns').innerHTML = stringquadratic();
-	document.getElementById('factoringAns').innerHTML = stringquadratic();
-	document.getElementById('squaresAns').innerHTML = stringquadratic();
+	document.getElementById('quadFormulaAns').innerHTML = stringquadratic(a, b, c);
+	document.getElementById('factoringAns').innerHTML = stringquadratic(a, b, c);
+	document.getElementById('squaresAns').innerHTML = stringquadratic(a, b, c);
 
 	MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 
 }
 
-function stringquadratic(){
-	
+function stringquadratic(sa, sb, sc) {
+
 	var stringOut = "";
 
-	var sta = a.toString();
-	if (a == 1) {
+	var sta = sa.toString();
+	if (sa == 1) {
 		sta = ""
 	}
-	if (a == -1) {
+	if (sa == -1) {
 		sta = "-"
 	}
 
 	var stb = "";
-	stb = b.toString() + "x";
-	if (b > 0) {
-		stb = "+" + b.toString() + "x"
+	stb = sb.toString() + "x";
+	if (sb > 0) {
+		stb = "+" + sb.toString() + "x"
 	}
-	if (b == 0) {
+	if (sb == 0) {
 		stb = ""
 	}
-	if (b == 1) {
+	if (sb == 1) {
 		stb = "+" + "x"
 	}
-	if (b == -1) {
+	if (sb == -1) {
 		stb = "-" + "x"
 	}
 
 	var stc = "";
-	stc = c.toString();
-	if (c > 0) {
-		stc = "+" + c.toString()
+	stc = sc.toString();
+	if (sc > 0) {
+		stc = "+" + sc.toString()
 	}
-	if (c == 0) {
+	if (sc == 0) {
 		stc = ""
 	}
 
-	return  '$' + sta + 'x^2' + stb + stc + '=0$';
+	return '$' + sta + 'x^2' + stb + stc + '=0$';
 }
 
 onload = function() {

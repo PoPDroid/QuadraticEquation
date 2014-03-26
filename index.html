@@ -39,8 +39,6 @@
 
 			<div data-role="content">
 				<a href="#newDialog" data-role="button" data-rel="dialog">New Equation</a>
-				<br/>
-				<br/>
 
 				<div id="equation" style="display:none">
 					<font size="5px" color="red"><span id="myDiva"></span></font></p>
@@ -98,7 +96,7 @@
 								</div>
 								<div  id="quadformula2container" style="display:none" >
 									<div ></div>
-									STEP2: Plug in the values for a, b, and c into parts $(-b,b^2,4ac,2a)$ of quadratic formula $\frac{-b \pm \sqrt{b^2-4ac}}{2a}$
+									STEP2: Plug in the values for a, b, and c into  $-b,\,b^2,\,4ac,\,2a$
 									<div  id="quadformula2a" style="display: table-row" >
 										<div style="display: table-cell;" >
 											$\implies-b=$
@@ -148,7 +146,7 @@
 									</div>
 								</div> <div ></div>
 								<div  id="quadformula3container" style="display:none" >
-							STEP2 (cont'd): Plug in the values for a, b, and c into part $b^2,4ac$ of quadratic formula $\frac{-b \pm \sqrt{b^2-4ac}}{2a}$
+							STEP2 (cont'd): Plug in the values for $b^2$ and $4ac$ into $b^2-4ac$ 
 									<div  id="quadformula3" style="display: table-row" >
 										<div  style="display: table-cell;" >
 											$\implies b^2-4ac=$
@@ -174,7 +172,7 @@
 									</div>
 								</div> <div ></div>
 								<div  id="quadformula4container" style="display:none" >
-							STEP2 (cont'd): Plug in the values for a, b, and c into part $\sqrt{b^2-4ac}$ of quadratic formula $\frac{-b \pm \sqrt{b^2-4ac}}{2a}$
+							STEP2 (cont'd): Find $\sqrt{b^2-4ac}$ 
 									<div  id="quadformula4" style="display: table-row" >
 										<div  style="display: table-cell;" >
 											$\implies \sqrt{b^2-4ac}=$
@@ -239,8 +237,8 @@
 
 					<div id="factoring" style="display:none">
 						<font size="5px"><span >
-								<div  id="factoring1scontainer"  >
-									STEP1: Simplify equation by taking out greatest common factor$
+								<div  id="factoring1container"  >
+									STEP1: Simplify equation by taking out greatest common factor and making $x^2$ coefficient positve
 									<div  id="factoring1" style="display: table-row" >
 
 										<div style="width:80px ;display: table-cell;" >
@@ -271,22 +269,8 @@
 										<div  style="display: table-cell;" >
 											$)=0$
 										</div>
-									</div>
-									<div></div>
-									<div  style="display: table-row" >
-										<div  style="display: table-cell;" >
-											<button  onclick="checkformula1()"  type='button'>
-												Submit
-											</button>
-										</div>
-										<div style="display: table-cell;" >
 
-											<button  onclick="solvequadformula1()"  type='button'>
-												Hint
-											</button>
-										</div>
 									</div>
-
 									<div></div>
 									<div  style="display: table-row" >
 										<div  style="display: table-cell;" >
@@ -297,6 +281,75 @@
 										<div style="display: table-cell;" >
 
 											<button  onclick="solvefactoring1()"  type='button'>
+												Hint/Skip
+											</button>
+										</div>
+									</div>
+								</div>
+								<div  id="factoring2container"  style="display: none">
+									STEP2: Factor The Quadratic Equation
+									<div  id="factoring2" style="display: table-row" >
+										<div id="gcfcontain" style="display:none" >
+											<div style="width:80px ;display: table-cell;" >
+												<input maxlength="4" size="4" type="number"  id="gcf2" >
+											</div>
+										</div>
+										<div  style="display: table-cell;" >
+											$($
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="4" size="4" type="number"  id="faca1" >
+										</div>
+
+										<div  style="display: table-cell;" >
+											$x$
+										</div>
+										<div  style="display: table-cell;" >
+											<select>
+											  <option value="plus">+</option>
+											  <option value="minus">-</option>
+											</select>
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="4" size="4" type="number"  id="facc1" >
+										</div>
+										
+										<div  style="display: table-cell;" >
+											$)($
+										</div>
+										
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="4" size="4" type="number"  id="faca2" >
+										</div>
+
+										<div  style="display: table-cell;" >
+											$x$
+										</div>
+										<div  style="display: table-cell;" >
+											<select>
+											  <option value="plus">+</option>
+											  <option value="minus">-</option>
+											</select>
+										</div>
+										<div style="width:80px ;display: table-cell;" >
+											<input maxlength="4" size="4" type="number"  id="facc2" >
+										</div>
+										
+										<div  style="display: table-cell;" >
+											$)$
+										</div>
+									</div>
+									<div></div>
+									<div></div>
+									<div  style="display: table-row" >
+										<div  style="display: table-cell;" >
+											<button  onclick="checkfactoring2()"  type='button'>
+												Submit
+											</button>
+										</div>
+										<div style="display: table-cell;" >
+
+											<button  onclick="solvefactoring2()"  type='button'>
 												Hint
 											</button>
 										</div>
