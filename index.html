@@ -23,6 +23,7 @@
 	</head>
 
 	<body>
+
 		<!--
 
 		give option to insert quadratic or randomly generate
@@ -53,9 +54,16 @@
 
 					<div id="quadformula" >
 
+						<div style="border:2px solid;border-radius:25px;" >
+							<br/>
+							<font size="5px" ><span id="quadFormulaAns"></span></font></p>
+						</div>
+						<br/>
 						<font size="5px"><span id="customquadformulaspan" >
 								<div  id="quadformula1container"  >
-									STEP1: Find coefficients a , b and c of equation in the form of $ax^2+bx+c=0$
+									STEP1: Find coefficients a , b and c
+									<br/>
+									of the equation in the form $ax^2+bx+c=0$
 									<div  id="quadformula1" style="display: table-row" >
 										<div style="display: table-cell;" >
 											$a=$
@@ -91,12 +99,20 @@
 												Hint
 											</button>
 										</div>
+										<div style="display: table-cell;" >
+
+											<button  onclick="solvequadformula()"  type='button'>
+												Solve
+											</button>
+										</div>
 									</div>
 
 								</div>
 								<div  id="quadformula2container" style="display:none" >
 									<div ></div>
-									STEP2: Plug in the values for a, b, and c into  $-b,\,b^2,\,4ac,\,2a$
+									STEP2: Consider $\frac{-b \pm \sqrt{b^2-4ac}}{2a}$.
+									<br/>
+									Find: $-b,\,b^2,\,4ac,$ and $\,2a$
 									<div  id="quadformula2a" style="display: table-row" >
 										<div style="display: table-cell;" >
 											$\implies-b=$
@@ -115,7 +131,7 @@
 									</div>
 									<div ></div>
 
-									<div  id="quadformula2b" style="display: table-row" >		
+									<div  id="quadformula2b" style="display: table-row" >
 										<div  style="display: table-cell;" >
 											$, 4ac=$
 										</div>
@@ -143,10 +159,17 @@
 												Hint
 											</button>
 										</div>
+
+										<div style="display: table-cell;" >
+
+											<button  onclick="solvequadformula()"  type='button'>
+												Solve
+											</button>
+										</div>
 									</div>
 								</div> <div ></div>
 								<div  id="quadformula3container" style="display:none" >
-							STEP2 (cont'd): Plug in the values for $b^2$ and $4ac$ into $b^2-4ac$ 
+									STEP2 (cont'd): Plug in the values for $b^2$ and $4ac$ into $b^2-4ac$
 									<div  id="quadformula3" style="display: table-row" >
 										<div  style="display: table-cell;" >
 											$\implies b^2-4ac=$
@@ -169,10 +192,17 @@
 												Hint
 											</button>
 										</div>
+
+										<div style="display: table-cell;" >
+
+											<button  onclick="solvequadformula()"  type='button'>
+												Solve
+											</button>
+										</div>
 									</div>
 								</div> <div ></div>
 								<div  id="quadformula4container" style="display:none" >
-							STEP2 (cont'd): Find $\sqrt{b^2-4ac}$ 
+									STEP2 (cont'd): Find $\sqrt{b^2-4ac}$
 									<div  id="quadformula4" style="display: table-row" >
 										<div  style="display: table-cell;" >
 											$\implies \sqrt{b^2-4ac}=$
@@ -195,10 +225,17 @@
 												Hint
 											</button>
 										</div>
+
+										<div style="display: table-cell;" >
+
+											<button  onclick="solvequadformula()"  type='button'>
+												Solve
+											</button>
+										</div>
 									</div>
 								</div> <div ></div>
 								<div  id="quadformula5container" style="display:none" >
-							STEP3: Plug in answers into quadratic formula $\frac{-b \pm \sqrt{b^2-4ac}}{2a}$
+									STEP3: Plug in answers into quadratic formula $\frac{-b \pm \sqrt{b^2-4ac}}{2a}$
 									<div  id="quadformula5" style="display: table-row" >
 										<div  style="display: table-cell;" >
 											$\implies  \frac{-b \pm \sqrt{b^2-4ac}}{2a} = $
@@ -227,15 +264,23 @@
 												Hint
 											</button>
 										</div>
+
+										<div style="display: table-cell;" >
+
+											<button  onclick="solvequadformula()"  type='button'>
+												Solve
+											</button>
+										</div>
 									</div>
-								</div>
-								<div  align="center" >
-									<font size="5px" color="red"><span id="quadFormulaAns"></span></font></p>
-								</div>
-								</span></font>
+								</div> </span></font>
 					</div>
 
 					<div id="factoring" style="display:none">
+						
+								<div style="border:2px solid;border-radius:25px;" >
+									<br/>
+									<font size="5px" color="red"><span id="factoringAns"></span></font></p>
+								</div> </span></font>
 						<font size="5px"><span >
 								<div  id="factoring1container"  >
 									STEP1: Simplify equation by taking out greatest common factor and making $x^2$ coefficient positve
@@ -258,11 +303,11 @@
 										<div style="width:80px ;display: table-cell;" >
 											<input maxlength="4" size="4" type="number"  id="newb" >
 										</div>
-										
+
 										<div  style="display: table-cell;" >
 											$x$
 										</div>
-										
+
 										<div style="width:80px ;display: table-cell;" >
 											<input maxlength="4" size="4" type="number"  id="newc" >
 										</div>
@@ -287,13 +332,10 @@
 									</div>
 								</div>
 								<div  id="factoring2container"  style="display: none">
-									STEP2: Factor The Quadratic Equation
+									STEP2: Factor the simplified quadratic equation
 									<div  id="factoring2" style="display: table-row" >
-										<div id="gcfcontain" style="display:none" >
-											<div style="width:80px ;display: table-cell;" >
-												<input maxlength="4" size="4" type="number"  id="gcf2" >
-											</div>
-										</div>
+										
+										<span id="gcf2"></span>
 										<div  style="display: table-cell;" >
 											$($
 										</div>
@@ -306,18 +348,18 @@
 										</div>
 										<div  style="display: table-cell;" >
 											<select>
-											  <option value="plus">+</option>
-											  <option value="minus">-</option>
+												<option value="plus">+</option>
+												<option value="minus">-</option>
 											</select>
 										</div>
 										<div style="width:80px ;display: table-cell;" >
 											<input maxlength="4" size="4" type="number"  id="facc1" >
 										</div>
-										
+
 										<div  style="display: table-cell;" >
 											$)($
 										</div>
-										
+
 										<div style="width:80px ;display: table-cell;" >
 											<input maxlength="4" size="4" type="number"  id="faca2" >
 										</div>
@@ -327,14 +369,14 @@
 										</div>
 										<div  style="display: table-cell;" >
 											<select>
-											  <option value="plus">+</option>
-											  <option value="minus">-</option>
+												<option value="plus">+</option>
+												<option value="minus">-</option>
 											</select>
 										</div>
 										<div style="width:80px ;display: table-cell;" >
 											<input maxlength="4" size="4" type="number"  id="facc2" >
 										</div>
-										
+
 										<div  style="display: table-cell;" >
 											$)$
 										</div>
@@ -355,24 +397,20 @@
 										</div>
 									</div>
 								</div>
-								<div  align="center" >
-									<font size="5px" color="red"><span id="factoringAns"></span></font></p>
-								</div>
-						</span></font>
 					</div>
 
 					<div id="squares" style="display:none">
-								<div  align="center" >
-									<font size="5px" color="red"><span id="squaresAns"></span></font></p>
-								</div>
+						<div  align="center" >
+							<font size="5px" color="red"><span id="squaresAns"></span></font></p>
+						</div>
 					</div>
-					
-					<br/>
-								<div id="canvascontain" align="center" style="display:none">
-									<canvas id="canvas2" width="500" height="500" style="border:solid 1px #0000ff">
 
-									</canvas>
-								</div> 
+					<br/>
+					<div id="canvascontain" align="center" style="display:none">
+						<canvas id="canvas2" width="500" height="500" style="border:solid 1px #0000ff">
+
+						</canvas>
+					</div>
 				</div>
 			</div>
 		</div>
