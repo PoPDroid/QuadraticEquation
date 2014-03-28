@@ -22,7 +22,7 @@
 
 	</head>
 
-	<body>
+	<body >
 
 		<!--
 
@@ -36,7 +36,7 @@
 		4diff of 2 squares same as above??
 
 		-->
-		<div data-role="page" id="mainPage" align="center">
+		<div data-role="page" id="mainPage" align="center" style="background-image: url('images/math.png'); background-attachment: fixed; background-repeat: no-repeat; background-size: 100% 100%;">
 
 			<div data-role="content">
 				<a href="#newDialog" data-role="button" data-rel="dialog">New Equation</a>
@@ -52,7 +52,7 @@
 						</select>
 					</fieldset>
 
-					<div id="quadformula" >
+					<div id="quadformula" style="border:2px solid;border-radius:25px;background-image: url('images/math_plain.png')" >
 
 						<div style="border:2px solid;border-radius:25px;" >
 							<br/>
@@ -60,7 +60,7 @@
 						</div>
 						<br/>
 						<font size="5px"><span id="customquadformulaspan" >
-								<div  id="quadformula1container"  >
+								<div  id="quadformula1container"   >
 									STEP1: Find coefficients a , b and c
 									<br/>
 									of the equation in the form $ax^2+bx+c=0$
@@ -281,7 +281,6 @@
 									<br/>
 									<font size="5px" color="red"><span id="factoringAns"></span></font></p>
 								</div> </span></font>
-						<font size="5px"><span >
 								<div  id="factoring1container"  >
 									STEP1: Simplify equation by taking out greatest common factor and making $x^2$ coefficient positve
 									<div  id="factoring1" style="display: table-row" >
